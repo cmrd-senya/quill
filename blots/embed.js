@@ -85,14 +85,15 @@ class Embed extends EmbedBlot {
           const t2 = document.createTextNode(text);
 
           this.parent.insertBefore(this.scroll.create(t2), this);
-        } else {
-          const r = new Range();
-          r.selectNodeContents(this.prev.domNode);
-          context.range = {
-            startNode: r.startContainer,
-            startOffset: r.endOffset,
-          };
         }
+
+        const r = new Range();
+        r.selectNodeContents(this.prev.domNode);
+        context.range = {
+          startNode: r.startContainer,
+          startOffset: r.endOffset,
+        };
+
         this.detach();
         this.remove();
         return false;
