@@ -90,8 +90,8 @@ class Embed extends EmbedBlot {
           r.selectNodeContents(this.prev.domNode);
           context.range = {
             startNode: r.startContainer,
-            startOffset: r.endOffset
-          }
+            startOffset: r.endOffset,
+          };
         }
         this.detach();
         this.remove();
