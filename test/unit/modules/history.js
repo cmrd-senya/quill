@@ -252,5 +252,22 @@ describe('History', function() {
       this.quill.history.redo();
       expect(this.quill.getText()).toEqual('1A2B3C4\n');
     });
+
+    it('setText with source "api"', function() {
+      this.quill.history.options.delay = 0;
+      this.quill.history.options.userOnly = true;
+      this.quill.setText('\n');
+      this.quill.insertText(0, 'ABC', Quill.sources.USER);
+      this.quill.insertText(0, '123', Quill.sources.USER);
+      expect(this.quill.getText()).toEqual('123ABC\n');
+      this.quill.setText('DEF', Quill.sources.API);
+      expect(this.quill.getText()).toEqual('DEF\n');
+      this.quill.history.undo();
+      expect(this.quill.getText()).toEqual('123ABC\n');
+      this.quill.history.undo();
+      expect(this.quill.getText()).toEqual('ABC\n');
+      this.quill.history.redo();
+      expect(this.quill.getText()).toEqual('123ABC\n');
+    });
   });
 });
